@@ -1,4 +1,4 @@
-#Project Title
+Project Title
 =============
 calculator_GB
 -------------
