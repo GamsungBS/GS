@@ -14,8 +14,8 @@ class Main(QDialog):
         layout_equation_solution = QFormLayout()
 
         ### 수식 입력과 답 출력을 위한 LineEdit 위젯 생성
-        label_equation = QLabel("Equation: ")
-        label_solution = QLabel("Number: ")
+        label_equation = QLabel("")
+        label_solution = QLabel("")
         self.equation = QLineEdit("")
         self.solution = QLineEdit("")
 
@@ -28,18 +28,21 @@ class Main(QDialog):
         button_minus = QPushButton("-")
         button_product = QPushButton("x")
         button_division = QPushButton("/")
+        button_remainder = QPushButton("%")
 
-        ### 사칙연산 버튼을 클릭했을 때, 각 사칙연산 부호가 수식창에 추가될 수 있도록 시그널 설정
+        ### 사칙연산+(%) 버튼을 클릭했을 때, 각 사칙연산 부호가 수식창에 추가될 수 있도록 시그널 설정
         button_plus.clicked.connect(lambda state, operation = "+": self.button_operation_clicked(operation))
         button_minus.clicked.connect(lambda state, operation = "-": self.button_operation_clicked(operation))
         button_product.clicked.connect(lambda state, operation = "*": self.button_operation_clicked(operation))
         button_division.clicked.connect(lambda state, operation = "/": self.button_operation_clicked(operation))
+        button_remainder.clicked.connect(lambda state, operation = "%": self.button_operation_clicked(operation))
 
-        ### 사칙연산 버튼을 layout_operation 레이아웃에 추가
+        ### 사칙연산+(%) 버튼을 layout_operation 레이아웃에 추가
         layout_Grid.addWidget(button_plus, 4, 3)
         layout_Grid.addWidget(button_minus, 3, 3)
         layout_Grid.addWidget(button_product, 2, 3)
         layout_Grid.addWidget(button_division, 1, 3)
+        layout_Grid.addWidget(button_remainder, 0, 0)
 
         ### =, clear, backspace 버튼 생성
         button_equal = QPushButton("=")
