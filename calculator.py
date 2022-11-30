@@ -113,7 +113,7 @@ class Main(QDialog):
 
     def button_equal_clicked(self):
         equation_solution = self.equation_solution.text()
-        solution = eval(equation_solution)
+        equation_solution = eval(equation_solution)
         self.equation_solution.setText(str(equation_solution))
 
     def button_clear_clicked(self):
@@ -124,6 +124,9 @@ class Main(QDialog):
         equation_solution = self.equation_solution.text()
         equation_solution = equation_solution[:-1]
         self.equation_solution.setText(equation_solution)
+        
+
+        
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
