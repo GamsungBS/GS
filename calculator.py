@@ -29,6 +29,12 @@ class Main(QDialog):
         button_product = QPushButton("x")
         button_division = QPushButton("/")
         button_remainder = QPushButton("%")
+        
+        ### 역수 제곱 제곱근 버튼 생성
+        button_reciprocal = QPushButton("1/x")
+        button_square = QPushButton("x^2")
+        button_squartRoot = QPushButton("2√x")
+        
 
         ### 사칙연산+(%) 버튼을 클릭했을 때, 각 사칙연산 부호가 수식창에 추가될 수 있도록 시그널 설정
         button_plus.clicked.connect(lambda state, operation = "+": self.button_operation_clicked(operation))
@@ -37,25 +43,33 @@ class Main(QDialog):
         button_division.clicked.connect(lambda state, operation = "/": self.button_operation_clicked(operation))
         button_remainder.clicked.connect(lambda state, operation = "%": self.button_operation_clicked(operation))
 
-        ### 사칙연산+(%) 버튼을 layout_operation 레이아웃에 추가
+        ### 사칙연산+(%) 버튼을 layout_Grid 레이아웃에 추가
         layout_Grid.addWidget(button_plus, 4, 3)
         layout_Grid.addWidget(button_minus, 3, 3)
         layout_Grid.addWidget(button_product, 2, 3)
         layout_Grid.addWidget(button_division, 1, 3)
         layout_Grid.addWidget(button_remainder, 0, 0)
+        
+        ### 역수 제곱 제곱근 버튼 layout에 추가
+        layout_Grid.addWidget(button_reciprocal, 1, 0)
+        layout_Grid.addWidget(button_square, 1, 1)
+        layout_Grid.addWidget(button_squartRoot, 1, 2)
 
-        ### =, clear, backspace 버튼 생성
+        ### =, C, CE, backspace 버튼 생성
         button_equal = QPushButton("=")
-        button_clear = QPushButton("Clear")
+        button_C = QPushButton("C")
+        button_CE = QPushButton("CE")
         button_backspace = QPushButton("Backspace")
 
-        ### =, clear, backspace 버튼 클릭 시 시그널 설정
+        ### =, C, CE, backspace 버튼 클릭 시 시그널 설정
         button_equal.clicked.connect(self.button_equal_clicked)
-        button_clear.clicked.connect(self.button_clear_clicked)
+        button_C.clicked.connect(self.button_clear_clicked)
+        button_CE.clicked.connect(self.button_clear_clicked)
         button_backspace.clicked.connect(self.button_backspace_clicked)
 
-        ### =, clear, backspace 버튼을 layout_clear_equal 레이아웃에 추가
-        layout_Grid.addWidget(button_clear, 0, 2)
+        ### =, C, CE, backspace 버튼을 layout_clear_equal 레이아웃에 추가
+        layout_Grid.addWidget(button_C, 0, 2)
+        layout_Grid.addWidget(button_CE, 0, 1)
         layout_Grid.addWidget(button_backspace, 0, 3)
         layout_Grid.addWidget(button_equal, 5, 3)
 
