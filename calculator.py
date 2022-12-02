@@ -1,5 +1,6 @@
 import sys
 from PyQt5.QtWidgets import *
+import numpy as np
 
 class Main(QDialog):
     def __init__(self):
@@ -31,7 +32,6 @@ class Main(QDialog):
         button_square = QPushButton("x^2")
         button_squareRoot = QPushButton("2√x")
         
-
         ### 사칙연산+(%) 버튼을 클릭했을 때, 각 사칙연산 부호가 수식창에 추가될 수 있도록 시그널 설정
         button_plus.clicked.connect(lambda state, operation = "+": self.button_operation_clicked(operation))
         button_minus.clicked.connect(lambda state, operation = "-": self.button_operation_clicked(operation))
@@ -39,7 +39,11 @@ class Main(QDialog):
         button_division.clicked.connect(lambda state, operation = "/": self.button_operation_clicked(operation))
         button_remainder.clicked.connect(lambda state, operation = "%": self.button_operation_clicked(operation))
 
-
+        ### 역수 제곱 제곱근 버틑 클릭시 시그널 설정
+        button_reciprocal.clicked.connect(lambda state, operation = "1/": self.button_reciprocal_clicked(operation))
+        button_squareRoot.clicked.connect(lambda state, operation = "**0.5": self.button_squareRoot_clicked(operation))
+        button_square.clicked.connect(lambda state, operation = "**2": self.button_squared_clicked(operation))
+        
         ### 사칙연산+(%) 버튼을 layout_Grid 레이아웃에 추가
         layout_Grid.addWidget(button_plus, 4, 3)
         layout_Grid.addWidget(button_minus, 3, 3)
@@ -57,12 +61,7 @@ class Main(QDialog):
         button_C = QPushButton("C")
         button_CE = QPushButton("CE")
         button_backspace = QPushButton("Backspace")
-        
-        ### 역수 제곱 제곱근 버틑 클릭시 시그널 설정
-        ## button_reciprocal.clicked.connect(self.button_reciprocal_clicked)
-        button_squareRoot.clicked.connect(lambda state, operation = "**0.5": self.button_squared_clicked(operation))
-        button_square.clicked.connect(lambda state, operation = "**2": self.button_squared_clicked(operation))
-        
+    
 
         ### =, C, CE, backspace 버튼 클릭 시 시그널 설정
         button_equal.clicked.connect(self.button_equal_clicked)
@@ -122,6 +121,14 @@ class Main(QDialog):
         equation_solution += operation
         self.equation_solution.setText(equation_solution)
         
+    def button_reciprocal_clicked(self, operation):
+        equation_solution = operation
+        equation_solution += self.equation_solution.text()
+        self.equation_solution.setText(equation_solution)
+        equation_solution = eval(equation_solution)
+        self.equation_solution.setText(str(equation_solution))
+
+        
     def button_squared_clicked(self, operation):
         equation_solution = self.equation_solution.text()
         equation_solution += operation
@@ -142,12 +149,10 @@ class Main(QDialog):
         equation_solution = self.equation_solution.text()
         equation_solution = eval(equation_solution)
         self.equation_solution.setText(str(equation_solution))
-
         
     def button_clear_clicked(self):
         self.equation_solution.setText("")
         self.equation_solution.setText("")
-
 
     def button_backspace_clicked(self):
         equation_solution = self.equation_solution.text()
